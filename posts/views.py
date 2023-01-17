@@ -1,6 +1,6 @@
 from django.shortcuts import render
 # from datetime import datetime
-from posts.models import Post
+from posts.models import Post, Comment
 
 def main(request):
     if request.method =='GET':
@@ -12,3 +12,13 @@ def posts_views(request):
         return render(request, 'posts/posts.html', context={
             'posts': posts
         })
+def post_detail_view(request, id):
+    if request.method == 'GET':
+        post_obj = Post.objects.get(id=id)
+        comments = Comment.objects.filter(post=post_obj)
+
+        context = {
+            'post': post_obj,
+            'comments': comments
+        }
+        return render(request, 'posts/detail.html', context=context)
