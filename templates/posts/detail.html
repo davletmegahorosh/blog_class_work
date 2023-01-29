@@ -21,12 +21,23 @@
         }
     </style>
     <div class="post">
+        <img src="/media/{{post.image}}/" alt="">
         <h1>{{ post.title }}</h1>
         <h4>{{ post.description }}</h4>
         <h4>Rate: {{ post.rate }}</h4>
         <div class="dates">
             <h5>{{ post.created_date }}</h5>
             <h5>{{ post.modified_date }}</h5>
+        </div>
+        <div class="create_comment">
+            <form action="/posts/{{ post.id }}/" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Add comment">
+            </form>
+        </div>
+        <div class="">
+
         </div>
         <div class="comments">
             {% for comment in comments %}

@@ -15,11 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from posts.views import main, posts_views, post_detail_view
+from posts.views import main, posts_views, post_detail_view,create_post
+from Blog1.settings import MEDIA_ROOT, MEDIA_URL
+from django.conf.urls.static import static
+from users.views import auth_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main),
     path('posts/',posts_views),
-    path('posts/<int:id>/',post_detail_view)
+    path('posts/<int:id>/',post_detail_view),
+    path('posts/create/',create_post),
+    path('users/login/',auth_view)
 ]
+
+urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
